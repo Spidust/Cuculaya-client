@@ -2,7 +2,7 @@ import React from 'react'
 
 const Card = (props) => {
   return (
-    <div className='card lg:w-3/12 md:w-3/12 sm:w-full h-fit px-4 py-8 bg-zinc-800 text-white text-center rounded-lg border border-orange-100'>
+    <div className='card mt-5 lg:w-[30%] md:w-full sm:w-full h-fit px-4 py-8 bg-zinc-800 text-white text-center rounded-lg border border-orange-100 lg:h-[500px]'>
         <img src={props.image} alt="image" className="img w-full" />
 
         <h2 className='title text-2xl font-bold mt-4 mx-auto'>{props.title}</h2>

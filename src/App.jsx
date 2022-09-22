@@ -6,12 +6,15 @@ import Navbar from "./components/Navbar";
 //HomePage
 import HomePage from "./components/HomePage/HomePage";
 
+//Login/Register
+import Login from "./components/Login.Register/Login";
 
 function App() {
-  return <div className="app bg-stone-700">
+  return <div className="app">
     <Navbar></Navbar>
     <Router>
       <Routes>
+        <Route path="/login" exact element={<Login />}></Route>
         <Route path="/" element={<HomePage />}></Route>
       </Routes>
     </Router>
