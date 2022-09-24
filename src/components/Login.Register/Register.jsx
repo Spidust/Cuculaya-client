@@ -12,7 +12,7 @@ function Login() {
   const [Redirect, SetRedirect] = useState(false);
 
   const loginApi = (username, password) => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/user/login`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/user/register`, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -27,16 +27,16 @@ function Login() {
         }
   
         localStorage.setItem("token", data.accessToken);
-        SetRedirect(true);
+        SetRedirect(true)
         return alert("logged in");
       });
   }
 
   return (
-    <div className="login container flex h-screen">
+    <div className="register container flex h-screen">
       {Error != "" && <div className="error">{Error}</div>}
       <form className="mx-auto self-center flex flex-wrap font-bold bg-stone-500 p-4 rounded-xl">
-        <h2 className="text-white font-bold text-3xl mx-auto my-10">LOGIN</h2>
+        <h2 className="text-white font-bold text-3xl mx-auto my-10">REGISTER</h2>
         <div className="username flex w-full h-10">
           <input
             type="text"
@@ -66,12 +66,12 @@ function Login() {
           }}
           className="text-white mx-auto rounded-md p-4 bg-orange-600 hover:bg-orange-700"
         >
-          Đăng nhập
+            Đăng kí
         </button>
       </form>
       {Redirect && <Navigate to="/" />}
     </div>
-  );
+);
 }
 
 
