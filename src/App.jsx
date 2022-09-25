@@ -1,5 +1,3 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 //Import general components
 import Navbar from "./components/Navbar";
 
@@ -8,38 +6,45 @@ import HomePage from "./components/HomePage/HomePage";
 
 //Login/Register
 import Login from "./components/Login.Register/Login";
+import Logout from "./components/Login.Register/Logout";
 import Register from "./components/Login.Register/Register";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
+//Profile
+import Profile from "./components/Profile/Profile";
 
+//Routes
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import UnPrivateRoute from "./components/Routes/UnPrivateRoute";
+import PrivateRoute from "./components/Routes/PrivateRoute";
+import { AuthContextProvider } from "./contexts/AuthContext";
 function App() {
-  const [loggedIn, SetLoggedIn] = useState({});
-
-  
-  useEffect(() => {
-    axios
-      .post(import.meta.env.VITE_API_URL + "/api/user/parse", {
-        token: localStorage.getItem("token"),
-      })
-      .then((data) => {
-        SetLoggedIn(data.data.data)
-      });
-  
-  }, [localStorage.getItem('token')])
   return (
     <div className="app">
-      <Navbar></Navbar>
-      <BrowserRouter>
-        {!["USER", "ADMIN"].includes(loggedIn.role) && (
-          <Routes>
-            <Route path="/login" exact element={<Login />}></Route>
-            <Route path="/register" exact element={<Register />}></Route>
-          </Routes>)}
-        <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <>
+        <AuthContextProvider>
+          <BrowserRouter>
+            <Navbar></Navbar>
+            <UnPrivateRoute path="login">
+              <Login />
+            </UnPrivateRoute>
+            <UnPrivateRoute path="register">
+              <Register />
+            </UnPrivateRoute>
+
+            <PrivateRoute path="profile">
+              <Profile></Profile>
+            </PrivateRoute>
+
+            <PrivateRoute path="logout">
+              <Logout></Logout>
+            </PrivateRoute>
+            <Routes>
+              <Route path="/" element={<HomePage />}></Route>
+            </Routes>
+
+          </BrowserRouter>
+        </AuthContextProvider>
+      </>
     </div>
   );
 }

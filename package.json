@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host & npm run tailwind",
+    "dev": "vite --host \n npm run tailwind",
     "build": "vite build",
     "preview": "vite preview",
     "tailwind": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
